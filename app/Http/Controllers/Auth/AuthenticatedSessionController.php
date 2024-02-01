@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,6 +29,23 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $user = Auth::user();
+
+        // $roles = $user->getRoleNames();
+
+        // dd($roles);
+        //
+        // dd($user->hasRole('admin'));
+
+        // dd($user->role);
+        if ($user->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->hasRole('cafeteria owner')) {
+            return redirect()->route('owner.dashboard');
+        } elseif ($user->hasRole('customer')) {
+            return redirect()->route('customer.dashboard');
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
