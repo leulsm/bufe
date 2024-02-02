@@ -12,7 +12,7 @@ class AdminController extends Controller
     public function dashboard()
     {
         // Logic for the admin dashboard
-        return view('admin.dashboard');
+        return view('admin.dashboard.index');
     }
 
     public function destroy(Request $request): RedirectResponse
