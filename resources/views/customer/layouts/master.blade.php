@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('customer/assets/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('customer/assets/css/jquery.exzoom.css') }}">
     <link rel="stylesheet" href="{{ asset('customer/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('customer/assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('customer/assets/css/responsive.css') }}">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
@@ -106,10 +107,18 @@
     <script src="{{ asset('customer/assets/js/wow.min.js') }}"></script>
     <!-- ex zoom js -->
     <script src="{{ asset('customer/assets/js/jquery.exzoom.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/toastr.min.js') }}"></script>
 
     <!--main/custom js-->
     <script src="{{ asset('customer/assets/js/main.js') }}"></script>
-
+    <script>
+        toastr.options.progressBar = true;
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}")
+            @endforeach
+        @endif
+    </script>
 </body>
 
 </html>
