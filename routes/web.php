@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProfileController;
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Routes accessible to users with the 'admin' role
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+    Route::put('admin/profile', [AdminProfileController::class, 'updateProfile'])->name('admin.profile.update');
+    Route::put('admin/profile/password', [AdminProfileController::class, 'updatePassword'])->name('admin.profile.updatePassword');
     Route::post('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 });
 
