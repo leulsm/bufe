@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\SiderController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProfileController;
@@ -42,6 +43,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('admin/profile', [AdminProfileController::class, 'updateProfile'])->name('admin.profile.update');
     Route::put('admin/profile/password', [AdminProfileController::class, 'updatePassword'])->name('admin.profile.updatePassword');
     Route::post('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+    // Slider Route
+    Route::resource('slider', SiderController::class);
 });
 
 // owner
@@ -57,5 +60,6 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('customer/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
     Route::post('/customer/logout', [CustomerController::class, 'destroy'])->name('customer.logout');
 });
+
 
 require __DIR__ . '/auth.php';

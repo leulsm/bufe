@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(RolesAndPermissionsSeeder::class);
+        $this->call(AdminSeeder::class);
+        \App\Models\Slider::factory(3)->create();
     }
 }
